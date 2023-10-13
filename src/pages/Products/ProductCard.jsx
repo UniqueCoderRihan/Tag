@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
     const { productName,description, prouctImages, _id, price, category } = product || {};
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
 
                 <div className="card-actions justify-end">
                     <div className="badge badge-outline btn-sm">{category}</div>
-                    <div className="btn btn-sm">See Details</div>
+                    <div className="btn btn-sm"> <Link to={`/product/${_id}`}>See Details</Link> </div>
                 </div>
             </div>
         </div>

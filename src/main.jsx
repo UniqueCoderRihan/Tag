@@ -7,6 +7,7 @@ import Home from './pages/Home/Home.jsx'
 import Login from './pages/Login/Login.jsx'
 import SingUp from './pages/SingUp/SingUp.jsx'
 import Products from './pages/Products/Products'
+import ProductDetails from './pages/Products/ProductDetails'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: '/all-products',
         element: <Products/>
+      },
+      {
+        path:'/product/:id',
+        element: <ProductDetails/>,
+        loader: ({params})=> fetch(`http://localhost:5174/product/${params.id}`)
       }
     ]
   }
