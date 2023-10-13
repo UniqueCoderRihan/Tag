@@ -1,13 +1,13 @@
 import Banner from '../../components/Banner/Banner';
 import Info from '../../components/info/Info';
-import Categoris from '../../components/Categoris/Categories';
+import Categories from './categoris/Categoris'
 
 const Home = () => {
     return (
         <div>
             <Banner/>
             <Info/>
-            <Categoris/>
+            <Categories/>
         </div>
     );
 };
