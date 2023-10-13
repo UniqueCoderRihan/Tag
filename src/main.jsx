@@ -6,6 +6,7 @@ import Main from './Layouts/Main.jsx'
 import Home from './pages/Home/Home.jsx'
 import Login from './pages/Login/Login.jsx'
 import SingUp from './pages/SingUp/SingUp.jsx'
+import Products from './pages/Products/Products'
 
 const router = createBrowserRouter([
   {
@@ -14,15 +15,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home/>
+        element: <Home />
       },
       {
         path: '/login',
-        element: <Login/>
+        element: <Login />
       },
       {
         path: '/singup',
-        element: <SingUp/>
+        element: <SingUp />
+      },
+      {
+        path: '/all-products',
+        element: <Products/>
       }
     ]
   }
@@ -31,6 +36,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
