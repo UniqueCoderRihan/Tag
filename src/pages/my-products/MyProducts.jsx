@@ -104,7 +104,7 @@ const MyProducts = () => {
                 <p className="text-3xl text-center mb-3">My Products</p>
             </div>
             {/* all product which i added on Database */}
-            <div>
+            <div className="grid justify-center space-x-1 space-y-1 md:grid-cols-3">
                 {
                     products.map(product=> <MyProductCard key={product._id} product={product}/>)
                 }

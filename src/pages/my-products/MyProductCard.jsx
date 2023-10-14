@@ -12,26 +12,71 @@ const validationSchema = Yup.object().shape({
     category: Yup.string().required('Product Category is required'),
     avaibleQuantity: Yup.number().typeError('Available Quantity must be a number').required('Available Quantity is required').positive('Available Quantity must be positive'),
     description: Yup.string().required('Description is required'),
-    
+
 });
 
 const MyProductCard = ({ product }) => {
-    const {user} = useContext(AuthContex);
-    const { productName, description, prouctImages, _id, price, category,availableQuantity} = product || {};
+    const { user } = useContext(AuthContex);
+    const { productName, description, prouctImages, _id, price, category, availableQuantity } = product || {};
     const { register, handleSubmit, errors, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
-            productName: productName || '', 
-            prouctImages: prouctImages || '', 
-            price: price || 0, 
-            category: category || 'tshirt', 
-            availableQuantity: availableQuantity || 10, 
+            productName: productName || '',
+            prouctImages: prouctImages || '',
+            price: price || 0,
+            category: category || 'tshirt',
+            availableQuantity: availableQuantity || 10,
             description: description || '',
         },
     });
+    // handleRemove
+    const handleRemove =()=>{
+        const productId = _id;
+
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Are you sure you want to remove this product?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User clicked "Yes" in the confirmation Swal
+                fetch(`http://localhost:3000/deleteProduct/${productId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.acknowledged) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Product Removed!',
+                            icon: 'success',
+                            confirmButtonText: 'Done',
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Failed!',
+                            text: 'Product Not Removed!',
+                            icon: 'failed',
+                            confirmButtonText: 'try again',
+                        });
+                    }
+                })
+                .catch((error) => {
+                    // Handle network or server errors here
+                });
+            }
+        });
+        
+    }
 
     // handleUpdate
-    const handleUpdateProduct =()=>{
+    const handleUpdateProduct = () => {
         openModal();
     }
 
@@ -45,7 +90,7 @@ const MyProductCard = ({ product }) => {
     };
     const onSubmit = async (data) => {
         console.log(data);
-    
+
         const updatedProduct = {
             _id: _id,
             productName: data.productName,
@@ -57,7 +102,7 @@ const MyProductCard = ({ product }) => {
             category: data.category,
             sellerEmail: user.email,
         };
-    
+
         fetch('http://localhost:3000/updateProduct', {
             method: 'PUT',
             headers: {
@@ -65,30 +110,34 @@ const MyProductCard = ({ product }) => {
             },
             body: JSON.stringify(updatedProduct),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            if (data.acknowledged) {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Product Updated!',
-                    icon: 'success',
-                    confirmButtonText: 'Done',
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.acknowledged) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Product Updated!',
+                        icon: 'success',
+                        confirmButtonText: 'Done',
+                    });
+
+                    closeModal(true);
+                    reset();
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Please Try Again Later',
+                        icon: 'error',
+                        confirmButtonText: 'Cool',
+                    });
+                }
+                // Prevent page refresh on Swal close
+                Swal.getPopup().addEventListener('close', () => {
+                    return false;
                 });
-    
-                closeModal(true);
-                reset();
-            } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please Try Again Later',
-                    icon: 'error',
-                    confirmButtonText: 'Cool',
-                });
-            }
-        });
+            });
     };
-    
+
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <img src={prouctImages} className='w-[50%] mx-auto rounded-lg' alt="Shoes" />
@@ -100,7 +149,7 @@ const MyProductCard = ({ product }) => {
                 <p>{description}</p>
 
                 <div className="card-actions justify-end">
-                    <div className="btn btn-sm btn-success">Remove</div>
+                    <div onClick={handleRemove} className="btn btn-sm btn-success">Remove</div>
                     <div onClick={handleUpdateProduct} className="btn btn-sm btn-warning">Update Product</div>
                 </div>
             </div>
@@ -124,7 +173,7 @@ const MyProductCard = ({ product }) => {
                                 <input
                                     className="mt-1 p-2 w-full text-black border rounded focus:outline-none focus:border-blue-300"
                                     type="text"
-                                    
+
                                     {...register('productName')}
                                 />
                                 {errors?.productName && (
@@ -141,7 +190,7 @@ const MyProductCard = ({ product }) => {
                                 <input
                                     className="mt-1 p-2 w-full text-black border rounded focus:outline-none focus:border-blue-300"
                                     type="text"
-                                    
+
                                     {...register('prouctImages')}
                                 />
                                 {errors?.prouctImages && (
@@ -159,7 +208,7 @@ const MyProductCard = ({ product }) => {
                                 <input
                                     className="mt-1 p-2 w-full text-black border rounded focus:outline-none focus:border-blue-300"
                                     type="number"
-                                    
+
                                     {...register('price')}
                                 />
                                 {errors?.price && (
@@ -175,7 +224,7 @@ const MyProductCard = ({ product }) => {
                                 </label>
                                 <select
                                     className="mt-1 p-2 w-full text-black border rounded focus:outline-none focus:border-blue-300"
-                                    
+
                                     {...register('category')}
                                 >
                                     <option value="tshirt">T-Shirt</option>
@@ -198,7 +247,7 @@ const MyProductCard = ({ product }) => {
                                 <input
                                     className="mt-1 p-2 w-full text-black border rounded focus:outline-none focus:border-blue-300"
                                     type="number"
-                                    
+
                                     {...register('avaibleQuantity')}
 
                                 />{errors?.avaibleQuantity && (
@@ -218,7 +267,7 @@ const MyProductCard = ({ product }) => {
                                     required
                                     {...register('description')}
                                 /> */}
-                                <textarea 
+                                <textarea
                                     {...register('description')} id="description" name="description" rows="4" cols="50"></textarea>
                                 {errors?.description && (
                                     <p className="text-red-500">{errors.description.message}</p>
