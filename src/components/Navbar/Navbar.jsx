@@ -18,11 +18,13 @@ const Navbar = () => {
             <Link to='/all-products'>All Products</Link>
         </li>
 
-        <li>
-            <Link to='/my-products'>My Products</Link>
-        </li>
         {
-            user ? <li className=' px-2'> <Link onClick={handleLogout}>Logout</Link> </li>:<li className=' px-2'> <Link to='/login'>Login</Link> </li>
+            user && <li>
+                <Link to='/my-products'>My Products</Link>
+            </li>
+        }
+        {
+            user ? <li className=' px-2'> <Link onClick={handleLogout}>Logout</Link> </li> : <li className=' px-2'> <Link to='/login'>Login</Link> </li>
         }
     </>
     return (
