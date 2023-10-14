@@ -15,7 +15,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const MyProducts = () => {
-    const {user} = useContext(AuthContex)
+    const {user,loading} = useContext(AuthContex)
     const [products, setProducts] = useState([]);
     const [searchText, setText] = useState('');
     const { register, handleSubmit, errors,reset } = useForm({
@@ -88,6 +88,9 @@ const MyProducts = () => {
             .then(data => setProducts(data))
 
     }, [url])
+    if (loading) {
+        return <span className="loading loading-bars loading-md"></span>
+    }
     return (
         <div>
             <div className="">

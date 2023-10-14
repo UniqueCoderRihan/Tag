@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import { AuthContex } from "../../Provider/AuthProvider";
 
 const Products = () => {
+    const {loading} = useContext(AuthContex)
     const [products, setProducts] = useState([]);
     const [searchText,setText] = useState('');
     // handel Search functionalities
@@ -32,7 +34,9 @@ const Products = () => {
 
     }, [])
 
-
+    if (loading) {
+        return <span className="loading loading-bars loading-md"></span>
+    }
     return (
         <div>
             <div className="">
