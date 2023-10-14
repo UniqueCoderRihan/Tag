@@ -25,7 +25,7 @@ const MyProductCard = ({ product }) => {
             prouctImages: prouctImages || '', 
             price: price || 0, 
             category: category || 'tshirt', 
-            availableQuantity: availableQuantity || 0, 
+            availableQuantity: availableQuantity || 10, 
             description: description || '',
         },
     });
@@ -47,7 +47,7 @@ const MyProductCard = ({ product }) => {
         console.log(data);
     
         const updatedProduct = {
-            _id: data._id, // The unique identifier of the product you want to update
+            _id: _id,
             productName: data.productName,
             productImages: data.productImages,
             price: data.price,
@@ -59,7 +59,7 @@ const MyProductCard = ({ product }) => {
         };
     
         fetch('http://localhost:3000/updateProduct', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },
