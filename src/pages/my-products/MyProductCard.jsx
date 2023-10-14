@@ -43,7 +43,7 @@ const MyProductCard = ({ product }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // User clicked "Yes" in the confirmation Swal
-                fetch(`http://localhost:3000/deleteProduct/${productId}`, {
+                fetch(`https://tag-server.vercel.app/deleteProduct/${productId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ const MyProductCard = ({ product }) => {
             sellerEmail: user.email,
         };
 
-        fetch('http://localhost:3000/updateProduct', {
+        fetch('https://tag-server.vercel.app/updateProduct', {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',

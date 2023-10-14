@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <ProductDetails />,
-        loader: ({ params }) => fetch(`http://localhost:3000/product/${params.id}`)
+        loader: ({ params }) => fetch(`https://tag-server.vercel.app/product/${params.id}`)
       },
 
       {

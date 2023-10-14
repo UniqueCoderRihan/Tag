@@ -31,7 +31,7 @@ const MyProducts = () => {
     };
     // handel Search functionalities
     const handleSearch = () => {
-        fetch(`http://localhost:3000/searched/${searchText}`)
+        fetch(`https://tag-server.vercel.app/searched/${searchText}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }
@@ -49,7 +49,7 @@ const MyProducts = () => {
         }
         // use realtime user info TODO::::
         // console.log(product);
-        fetch('http://localhost:3000/addProduct', {
+        fetch('https://tag-server.vercel.app/addProduct', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -80,7 +80,7 @@ const MyProducts = () => {
                 }
             })
     }
-    const url = (`http://localhost:3000/my-product?email=${user?.email}`);
+    const url = (`https://tag-server.vercel.app/my-product?email=${user?.email}`);
 
     useEffect(() => {
         fetch(url)

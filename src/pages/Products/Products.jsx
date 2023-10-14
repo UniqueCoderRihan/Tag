@@ -8,14 +8,14 @@ const Products = () => {
     const [searchText,setText] = useState('');
     // handel Search functionalities
     const handleSearch=()=>{
-        fetch(`http://localhost:3000/searched/${searchText}`)
+        fetch(`https://tag-server.vercel.app/searched/${searchText}`)
         .then(res=>res.json())
         .then(data=>setProducts(data))
     }
     // handle High to low shorting
     const handleHighToLow = () => {
         console.log("High to Low Btn clicked");
-        fetch('http://localhost:3000/products/sort/high-to-low')
+        fetch('https://tag-server.vercel.app/products/sort/high-to-low')
             .then(res => res.json())
             .then(data => setProducts(data))
     }
@@ -23,12 +23,12 @@ const Products = () => {
     // handle Low to High Shorting
     const handleLowToHigh = () => {
         console.log("Low to high ");
-        fetch('http://localhost:3000/products/sort/low-to-high')
+        fetch('https://tag-server.vercel.app/products/sort/low-to-high')
             .then(res => res.json())
             .then(data => setProducts(data))
     }
     useEffect(() => {
-        fetch('http://localhost:3000/products')
+        fetch('https://tag-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setProducts(data))
 
