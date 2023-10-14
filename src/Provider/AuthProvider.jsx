@@ -44,6 +44,8 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return sendPasswordResetEmail(auth,email)
     }
+    
+
     useEffect(() => {
         const unsubscrive = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
@@ -63,6 +65,7 @@ const AuthProvider = ({ children }) => {
         resetPass,
         userProfileUpdate, logout, LoginUser, createUser
     }
+    
     return (
         <AuthContex.Provider value={AuthInfo}>
             {children}

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthContex } from "../../Provider/AuthProvider";
 const validationSchema = Yup.object().shape({
     productName: Yup.string().required('Product Name is required'),
     prouctImages: Yup.string().url('Invalid image link').required('Image link is required'),
@@ -13,6 +14,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const MyProducts = () => {
+    const {user} = useContext(AuthContex)
     const [products, setProducts] = useState([]);
     const [searchText, setText] = useState('');
     const { register, handleSubmit, errors,reset } = useForm({
@@ -38,11 +40,11 @@ const MyProducts = () => {
             productName: data.productName,
             prouctImages: data.prouctImages,
             price: data.price,
-            author: 'Tag-Think static',
+            author: user.displayName,
             description: data.description,
             avaibleQuantity: data.avaibleQuantity,
             category: data.category,
-            sellerEmail: 'raihanvai@gmail.com'
+            sellerEmail: user.email
         }
         // use realtime user info TODO::::
         // console.log(product);

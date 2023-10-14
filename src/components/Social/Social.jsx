@@ -1,21 +1,68 @@
 import { useContext } from "react";
 import { FaGoogle, FaFacebookSquare } from "react-icons/fa";
+import { AuthContex } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Social = () => {
-    
+    const { googleSign, fbLogin, loading } = useContext(AuthContex);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const handleGoogle = () => {
+        googleSign()
+            .then(data => {
+                const loggedUser = data.user;
+                const user = { name: loggedUser.displayName, address: '', university: '', photoUrL: loggedUser.photoURL, email: loggedUser.email, firebase: data.user.metadata }
+                fetch('http://localhost:3000/users', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Successfully Entry!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        navigate(from, { replace: true })
+                    })
+            })
+
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    const handleFacebook = () => {
+        fbLogin()
+            .then(data => {
+                console.log(data.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+    if (loading) {
+        return <span className="loading loading-bars loading-md"></span>
+    }
     return (
         <div>
             <div className="divider mt-0"></div>
             <div className="text-center">
-                <button className="btn btn-outline btn-circle text-2xl">
+                <button onClick={handleGoogle} className="btn btn-outline btn-circle text-2xl">
                     <FaGoogle></FaGoogle>
                 </button>
-                <button className="btn btn-outline btn-circle text-2xl ml-2">
+                <button onClick={handleFacebook} className="btn btn-outline btn-circle text-2xl ml-2">
                     <FaFacebookSquare></FaFacebookSquare>
                 </button>
             </div>
         </div>
     );
 };
-
 export default Social;

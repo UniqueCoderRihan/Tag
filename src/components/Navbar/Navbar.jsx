@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { AuthContex } from '../../Provider/AuthProvider';
 
 const Navbar = () => {
-    // const { user, logout } = useContext(AuthContex);
-    // console.log(user);
+    const { user, logout } = useContext(AuthContex);
+    console.log(user);
 
-    // const handleLogout = () => {
-    //     logout();
-    // }
+    const handleLogout = () => {
+        logout();
+    }
     const items = <>
         <li>
             <Link to='/'>Home</Link>
@@ -21,7 +21,9 @@ const Navbar = () => {
         <li>
             <Link to='/my-products'>My Products</Link>
         </li>
-        <li className=' px-2'> <Link to='/login'>Login</Link> </li>
+        {
+            user ? <li className=' px-2'> <Link onClick={handleLogout}>Logout</Link> </li>:<li className=' px-2'> <Link to='/login'>Login</Link> </li>
+        }
     </>
     return (
         <header className="border-b border-black">
