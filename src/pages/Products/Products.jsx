@@ -4,10 +4,26 @@ import ProductCard from "./ProductCard";
 const Products = () => {
     const [products, setProducts] = useState([]);
 
+    // handle High to low shorting
+    const handleHighToLow = () => {
+        console.log("High to Low Btn clicked");
+        fetch('http://localhost:3000/products/sort/high-to-low')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }
+
+    // handle Low to High Shorting
+    const handleLowToHigh = () => {
+        console.log("Low to high ");
+        fetch('http://localhost:3000/products/sort/low-to-high')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }
     useEffect(() => {
         fetch('http://localhost:3000/products')
             .then(res => res.json())
             .then(data => setProducts(data))
+
     }, [])
 
 
@@ -21,8 +37,8 @@ const Products = () => {
                     </div>
 
                     <div className="flex justify-end space-x-2">
-                        <button className="btn btn-primary">Low to high</button>
-                        <button className="btn btn-warning">High to low</button>
+                        <button onClick={handleLowToHigh} className="btn btn-primary">Low to high</button>
+                        <button onClick={handleHighToLow} className="btn btn-warning">High to low</button>
                     </div>
                 </div>
 
