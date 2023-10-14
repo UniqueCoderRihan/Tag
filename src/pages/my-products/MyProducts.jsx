@@ -79,15 +79,14 @@ const MyProducts = () => {
                 }
             })
     }
-
-
+    const url = (`http://localhost:3000/my-product?email=${user?.email}`);
 
     useEffect(() => {
-        fetch('http://localhost:3000/products')
+        fetch(url)
             .then(res => res.json())
             .then(data => setProducts(data))
 
-    }, [])
+    }, [url])
     return (
         <div>
             <div className="">
@@ -104,7 +103,9 @@ const MyProducts = () => {
                 <p className="text-3xl text-center mb-3">My Products</p>
             </div>
             {/* all product which i added on Database */}
-
+            <div>
+                product {products.length}
+            </div>
 
 
 
