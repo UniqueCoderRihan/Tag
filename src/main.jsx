@@ -9,7 +9,7 @@ import SingUp from './pages/SingUp/SingUp.jsx'
 import Products from './pages/Products/Products'
 import ProductDetails from './pages/Products/ProductDetails'
 import MyProducts from './pages/my-products/MyProducts'
-import AddNewProduct from './pages/add-new-product/AddNewProduct'
+// import AddNewProduct from './pages/add-new-product/AddNewProduct'
 
 const router = createBrowserRouter([
   {
@@ -37,10 +37,7 @@ const router = createBrowserRouter([
         element: <ProductDetails/>,
         loader: ({params})=> fetch(`http://localhost:3000/product/${params.id}`)
       },
-      {
-        path:'/add-new-product',
-        element: <AddNewProduct/>
-      },
+      
       {
         path: '/my-products',
         element: <MyProducts/>

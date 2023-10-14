@@ -17,10 +17,7 @@ const Navbar = () => {
         <li>
             <Link to='/all-products'>All Products</Link>
         </li>
-        {/* TODO: it will be conditional !user ===locked */}
-        <li>
-            <Link to='/add-new-product'>Add New Products</Link>
-        </li>
+        
         <li>
             <Link to='/my-products'>My Products</Link>
         </li>
