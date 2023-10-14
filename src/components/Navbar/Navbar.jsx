@@ -1,4 +1,4 @@
-import  { useContext } from 'react';
+import { useContext } from 'react';
 import { FaCartPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { AuthContex } from '../../Provider/AuthProvider';
@@ -17,27 +17,11 @@ const Navbar = () => {
         <li>
             <Link to='/all-products'>All Products</Link>
         </li>
-        
+
         <li>
             <Link to='/my-products'>My Products</Link>
         </li>
-        <li>
-            <Link to='/'>Blog</Link>
-        </li>
-
-        {/* {
-            user ? <>
-                <li className=' px-2'> <Link to='/dashbord'>Dashbord</Link> </li>
-                <div className="avatar">
-                    <div className="w-12  rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src={user?.photoURL} />
-                    </div>
-                </div>
-                <li className=' px-2'> <Link onClick={handleLogout}>Logout</Link> </li>
-            </> : <>
-                <li className=' px-2'> <Link to='/login'>Login</Link> </li>
-            </>
-        } */}
+        <li className=' px-2'> <Link to='/login'>Login</Link> </li>
     </>
     return (
         <header className="border-b border-black">
@@ -81,7 +65,7 @@ const Navbar = () => {
                     <Link to={'/'} className="font-bold font-mono text-xl lg:text-2xl">Think and get</Link>
                 </div>
                 <div className="navbar-end">
-                    
+
                     <button className="btn btn-ghost btn-circle">
                         <div className="indicator">
                             <svg
