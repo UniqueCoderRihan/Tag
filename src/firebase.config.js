@@ -5,13 +5,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAwc1SqhtRwEcAUUGMTs2SJ1ZY9eoTueJI",
-  authDomain: "think-and-get.firebaseapp.com",
-  projectId: "think-and-get",
-  storageBucket: "think-and-get.appspot.com",
-  messagingSenderId: "1000943244619",
-  appId: "1:1000943244619:web:7911caa2c303c16ca0c4ce"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
