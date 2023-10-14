@@ -3,7 +3,13 @@ import ProductCard from "./ProductCard";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
-
+    const [searchText,setText] = useState('');
+    // handel Search functionalities
+    const handleSearch=()=>{
+        fetch(`http://localhost:3000/searched/${searchText}`)
+        .then(res=>res.json())
+        .then(data=>setProducts(data))
+    }
     // handle High to low shorting
     const handleHighToLow = () => {
         console.log("High to Low Btn clicked");
@@ -32,8 +38,8 @@ const Products = () => {
             <div className="">
                 <div className="flex space-x-2 my-2 justify-between">
                     <div className="space-x-2">
-                        <input type="text" placeholder="Search Product" className="input input-bordered" />
-                        <button className="btn btn-secondary">Search</button>
+                        <input onChange={(e)=>setText(e.target.value)} type="text" placeholder="Search Product" className="input input-bordered" />
+                        <button onClick={handleSearch} className="btn btn-secondary">Search</button>
                     </div>
 
                     <div className="flex justify-end space-x-2">
