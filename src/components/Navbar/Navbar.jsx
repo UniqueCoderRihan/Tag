@@ -15,10 +15,14 @@ const Navbar = () => {
             <Link to='/'>Home</Link>
         </li>
         <li>
-            <Link to='/all-products'>Products</Link>
+            <Link to='/all-products'>All Products</Link>
+        </li>
+        {/* TODO: it will be conditional !user ===locked */}
+        <li>
+            <Link to='/add-new-product'>Add New Products</Link>
         </li>
         <li>
-            <Link to='/'>Collection</Link>
+            <Link to='/my-products'>My Products</Link>
         </li>
         <li>
             <Link to='/'>Blog</Link>
@@ -80,22 +84,7 @@ const Navbar = () => {
                     <Link to={'/'} className="font-bold font-mono text-xl lg:text-2xl">Think and get</Link>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn btn-ghost btn-circle">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </button>
+                    
                     <button className="btn btn-ghost btn-circle">
                         <div className="indicator">
                             <svg
