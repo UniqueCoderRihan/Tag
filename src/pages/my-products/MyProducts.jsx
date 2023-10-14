@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthContex } from "../../Provider/AuthProvider";
+import MyProductCard from "./MyProductCard";
 const validationSchema = Yup.object().shape({
     productName: Yup.string().required('Product Name is required'),
     prouctImages: Yup.string().url('Invalid image link').required('Image link is required'),
@@ -104,7 +105,9 @@ const MyProducts = () => {
             </div>
             {/* all product which i added on Database */}
             <div>
-                product {products.length}
+                {
+                    products.map(product=> <MyProductCard key={product._id} product={product}/>)
+                }
             </div>
 
 
